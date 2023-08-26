@@ -1,24 +1,49 @@
-name: Chat with GPT
+name: ChatGPT Workflow
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
 
 jobs:
-  chat:
+  chatgpt:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Send message to GPT
-      run: |
-        curl -X POST \
-        https://api.openai.com/v1/chat/completions \
-        -H "Content-Type: application/json" \
-        -H "Authorization: Bearer ${{ secrets.OPENAI_KEY }}" \
-        -d '{
-             "model": "gpt-3.5-turbo",
-             "messages": [{"role": "user", "content": "Say this is a test!"}],
-             "temperature": 0.7
-           }'
-      env:
-        OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+
+      - name: Install dependencies
+        run: pip install openai  # Install the openai library
+
+      - name: Run ChatGPT
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          import os
+          import openai
+
+          # Set your OpenAI API key from the GitHub secret
+          api_key = os.environ['OPENAI_API_KEY']
+
+          # Define the message you want to send to ChatGPT
+          message = "What is the weather like today?"
+
+          # Make a request to the ChatGPT API
+          response = openai.Completion.create(
+              engine="text-davinci-002",
+              prompt=message,
+              max_tokens=50,
+              api_key=api_key
+          )
+
+          # Extract the response text
+          chatgpt_response = response.choices[0].text
+
+          # Print the response
+          print(chatgpt_response)
