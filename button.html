@@ -1,13 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Silver Button with Shine Effect</title>
+<title>Silver Button with Shine Effect</title>
     <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
         .button {
-            display: inline-block;
-            padding: 20px 40px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 150px;
+            height: 150px;
             background-color: silver;
             border: none;
             border-radius: 50%;
@@ -46,9 +52,7 @@
     </style>
 </head>
 <body>
-    <a href="#" class="button">
-        Button
+    <div class="button">
         <div class="shine"></div>
-    </a>
+    </div>
 </body>
-</html>
