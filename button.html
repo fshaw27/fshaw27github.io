@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Silver Button with Shine Effect</title>
+    <style>
+        .button {
+            display: inline-block;
+            padding: 20px 40px;
+            background-color: silver;
+            border: none;
+            border-radius: 50%;
+            font-size: 18px;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .shine {
+            position: absolute;
+            top: -100%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0.8) 0%, transparent 50%, rgba(255, 255, 255, 0.8) 100%);
+            animation: shine-animation 2s infinite linear;
+            opacity: 0;
+        }
+
+        @keyframes shine-animation {
+            0% {
+                transform: translateX(-150%) translateY(-150%) rotate(45deg);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(150%) translateY(150%) rotate(45deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="#" class="button">
+        Button
+        <div class="shine"></div>
+    </a>
+</body>
+</html>
